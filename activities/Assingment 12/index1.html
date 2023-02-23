@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 11</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <form onsubmit="return false">
+        <div class="mb-3">
+            <label for="playerID">Player ID :</label>
+        <input id="playerID" type="text" />
+        </div>
+        <div class="mb-3">
+            <label for="playerName">Player Name :</label>
+        <input id="playeName" type="text" /><br>
+        </div>
+        <div class="mb-3">
+            <label for="runs">Runs :</label><br>
+            <input id="runs" type="text" /><br>
+        </div>
+        <div class="mb-3">
+            <button type="submit" onclick="addPlayer()">Add Player</button>
+        </div>
+        <div class="mb-3">
+            <button type="submit" onclick="removePlayers()">Remove Player</button>
+        </div>
+        
+        
+       
+        
+        
+    </form>
+
+    <table id="myTable">
+        <tr>
+            <th>Player ID</th>
+            <th>Name</th>
+            <th>Runs</th>
+            <th>Select to Remove</th>
+        </tr>
+    </table>
+
+    <script>
+        var addPlayer = () => {
+            var id = document.getElementById("playerID").value;
+            var name = document.getElementById("playeName").value;
+            var runs = document.getElementById("runs").value;
+
+            var table = document.getElementById("myTable")
+            var row = table.insertRow();
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+
+            cell1.innerHTML = id;
+            cell2.innerHTML = name;
+            cell3.innerHTML = runs;
+            cell4.innerHTML = "<input type=checkbox value=id />"
+
+        }
+
+        var removePlayers = () => {
+            
+            var table = document.getElementById("myTable")
+            
+            for(var i = 1; i <table.rows.length; i++){
+
+                var checkbox = table.rows[i].querySelector("input[type=checkbox]");
+
+                if(checkbox.checked){
+                    table.deleteRow(i);
+                    i--;
+                }
+
+                
+            }
+        }    
+    </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
