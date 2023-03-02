@@ -1,93 +1,202 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assignment 11</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<title>Player Scores</title>
+    <style>
+		/* Robotic style CSS */
+		* {
+			font-family: 'Roboto Mono', monospace;
+		}
 
+		body {
+			background-color: #1b1c1d;
+			color: #fff;
+		}
+
+		h1 {
+			font-size: 36px;
+			text-align: center;
+			margin-top: 50px;
+		}
+
+		form {
+			margin-top: 50px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		form label {
+			display: block;
+			font-size: 18px;
+			margin-bottom: 10px;
+		}
+
+		form input[type="text"] {
+			font-size: 16px;
+			padding: 10px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #363738;
+			color: #fff;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			width: 300px;
+			text-align: center;
+		}
+
+		button {
+			font-size: 18px;
+			padding: 10px 20px;
+			margin-bottom: 20px;
+			border: none;
+			border-radius: 5px;
+			background-color: #4bffa5;
+			color: #1b1c1d;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+
+		button:hover {
+			background-color: #4fffad;
+		}
+
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-bottom: 50px;
+		}
+
+		th, td {
+			text-align: left;
+			padding: 8px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		/* tr:nth-child(even) {
+			background-color: #fff;
+		} */
+
+		th {
+			background-color: #363738;
+			color: #fff;
+			text-transform: uppercase;
+			font-size: 14px;
+			letter-spacing: 2px;
+		}
+
+		input[type="checkbox"] {
+			margin: 0 auto;
+			display: block;
+			width: 20px;
+			height: 20px;
+			border-radius: 5px;
+			background-color: #363738;
+			cursor: pointer;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+		}
+
+		button[type="button"] {
+			font-size: 16px;
+			padding: 10px 20px;
+			margin: 0 auto;
+			border: none;
+			border-radius: 5px;
+			background-color: #ff4b4b;
+			color: #fff;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+			cursor: pointer;
+			transition: background-color 0.2s ease-in-out;
+		}
+
+		button[type="button"]:hover {
+			background-color: #ff4f4f;
+		}
+	</style>
 </head>
-
 <body>
-    <form onsubmit="return false">
-        <div class="mb-3">
-            <label for="playerID">Player ID :</label>
-        <input id="playerID" type="text" />
-        </div>
-        <div class="mb-3">
-            <label for="playerName">Player Name :</label>
-        <input id="playeName" type="text" /><br>
-        </div>
-        <div class="mb-3">
-            <label for="runs">Runs :</label><br>
-            <input id="runs" type="text" /><br>
-        </div>
-        <div class="mb-3">
-            <button type="submit" onclick="addPlayer()">Add Player</button>
-        </div>
-        <div class="mb-3">
-            <button type="submit" onclick="removePlayers()">Remove Player</button>
-        </div>
-        
-        
-       
-        
-        
-    </form>
+	<h1>Player Scores</h1>
 
-    <table id="myTable">
-        <tr>
-            <th>Player ID</th>
-            <th>Name</th>
-            <th>Runs</th>
-            <th>Select to Remove</th>
-        </tr>
-    </table>
+	<form>
+		<label for="player-id">Player ID:</label>
+		<input type="text" id="player-id" name="player-id"><br><br>
 
-    <script>
-        var addPlayer = () => {
-            var id = document.getElementById("playerID").value;
-            var name = document.getElementById("playeName").value;
-            var runs = document.getElementById("runs").value;
+		<label for="player-name">Player Name:</label>
+		<input type="text" id="player-name" name="player-name"><br><br>
 
-            var table = document.getElementById("myTable")
-            var row = table.insertRow();
+		<label for="player-runs">Player Runs:</label>
+		<input type="text" id="player-runs" name="player-runs"><br><br>
 
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            var cell4 = row.insertCell(3);
+		<button type="button" onclick="addData()">Add</button>
+	</form>
 
-            cell1.innerHTML = id;
-            cell2.innerHTML = name;
-            cell3.innerHTML = runs;
-            cell4.innerHTML = "<input type=checkbox value=id />"
+	<br>
 
-        }
+	<table id="score-table">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Name</th>
+				<th>Runs</th>
+				<th>Select</th>
+				<th>Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
 
-        var removePlayers = () => {
-            
-            var table = document.getElementById("myTable")
-            
-            for(var i = 1; i <table.rows.length; i++){
+	<br>
 
-                var checkbox = table.rows[i].querySelector("input[type=checkbox]");
+	<button type="button" onclick="removeData()">Remove Selected Rows</button>
 
-                if(checkbox.checked){
-                    table.deleteRow(i);
-                    i--;
-                }
+	<script>
+		function addData() {
+			// Get the values of the input fields
+			var id = document.getElementById("player-id").value;
+			var name = document.getElementById("player-name").value;
+			var runs = document.getElementById("player-runs").value;
 
-                
-            }
-        }    
-    </script>
+			// Create a new row for the table
+			var table = document.getElementById("score-table");
+			var row = table.insertRow(-1);
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+			// Add data to the row
+			var cell1 = row.insertCell(0);
+			var cell2 = row.insertCell(1);
+			var cell3 = row.insertCell(2);
+			var cell4 = row.insertCell(3);
+			var cell5 = row.insertCell(4);
 
+			cell1.innerHTML = id;
+			cell2.innerHTML = name;
+			cell3.innerHTML = runs;
+			cell4.innerHTML = "<input type='checkbox'>";
+			cell5.innerHTML = "<button type='button' onclick='removeRow(this)'>Remove</button>";
+		}
 
+		function removeRow(button) {
+			// Get the row that the button is in
+			var row = button.parentNode.parentNode;
+
+			// Remove the row
+			row.parentNode.removeChild(row);
+		}
+
+		function removeData() {
+			// Get all of the checkboxes in the table
+			var checkboxes = document.querySelectorAll("#score-table input[type='checkbox']");
+
+			// Loop through the checkboxes and remove the rows for any that are checked
+			for (var i = 0; i < checkboxes.length; i++) {
+				if (checkboxes[i].checked) {
+					var row = checkboxes[i].parentNode.parentNode;
+					row.parentNode.removeChild(row);
+				}
+			}
+		}
+	</script>
 </body>
-
 </html>
+``
